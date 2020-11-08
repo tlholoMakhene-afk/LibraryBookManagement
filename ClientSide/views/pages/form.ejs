@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="jumbotron">
+                    <h1><%= action %> Book Details!</h1>
+                    <p></p>
+                    <form name="form" method="POST" action="/<%= action === 'Update' ? action+ '/'+object._id : action %>">
+                        <table>
+                            <tr>
+                                <td><label for="title">Book Title:</label></td>
+                                <td><input type="text" required name="title"
+                                        value="<%= action === 'Update' ? object.title : '' %>"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="author">Book Author:</label></td>
+                                <td><input type="text" required name="author"
+                                        value="<%= action === 'Update' ? object.author : '' %>"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="date">Date Published:</label></td>
+                                <td><input type="number" required name="date"
+                                        value="<%= action === 'Update' ? object.date_of_publication : '2019' %>"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="category">Book Category:</label></td>
+                                <td><select id="category" name="category" required>
+                                        <% categories.forEach((catItem) => { %>
+                                                <% if(action === 'Update' && catItem === object.book_category ){ %>
+                                                    <option selected value="<%=catItem%>"><%=catItem%></option>
+                                                <% } else{ %>
+                                                    <option value="<%=catItem%>"><%=catItem%></option>
+                                                <% } %>
+                                        <% }) %>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input type="submit" value="<%= action === 'Update' ? 'Update' : 'Save' %>"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>
